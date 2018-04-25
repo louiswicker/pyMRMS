@@ -70,7 +70,7 @@ _dt_window = [-300,120]
 
 # Debug
 
-_debug = True
+_debug = False
 
 ##########################################################################################
 # Parameter dict for reflectivity masking
@@ -138,6 +138,7 @@ def Get_Closest_Elevations(path, anal_time, sub_dir=None, window=_dt_window):
           window:     len(window) == 1:  this is the window +/- of the analysis time.
                       len(window) == 2:  the window uses analysis_time + window[0] --> analysis_time + window[1]
                                          Note that window[0] should equal to or less than zero.
+                      window units are SECONDS
           
           RETURNS:    either an empty list, or a list with full path names of the 
                       radar's tilts that are within the supplied window.
@@ -184,9 +185,9 @@ def Get_Closest_Elevations(path, anal_time, sub_dir=None, window=_dt_window):
        
    if len(ObsFileList) > 0:
        print("\n ============================================================================\n")
-       print("\n PREP_VOLUME.Get_Closest_Elevations:  found %i files in %s  \n" % (len(ObsFileList), path))
+       print("\n Prep_MRMS.Get_Closest_Elevations:  found %i files in %s  \n" % (len(ObsFileList), path))
    else:
-       print("\n PREP_VOLUME.Get_Closest_Elevations:  No obs found \n")
+       print("\n Prep_MRMS.Get_Closest_Elevations:  No obs found \n")
 
    # Handy sort command that will give me the the lowest tilts first....       
    ObsFileList.sort(key=lambda f: int(filter(str.isdigit, f)))
@@ -642,22 +643,15 @@ def main(argv=None):
 
 #-------------------------------------------------------------------------------
 
-# if realtime, now find the file created within T+5 of analysis
+# if realtime, now find the file created within _dt_window of analysis time
 
    if options.realtime != None:
 
        in_filenames = Get_Closest_Elevations(options.dir, a_time)
 
-#      in_filenames = get_dir_files(options.dir, options.grep, debug=_debug)
-#
-       for n, file in enumerate(in_filenames):
-           if os.path.basename(file)[-2:] == "gz":
-               f_time = DT.datetime.strptime(os.path.basename(file)[-25:-10], "%Y%m%d-%H%M%S")
-           else:
-               f_time = DT.datetime.strptime(os.path.basename(file)[-25:-7], "%Y%m%d-%H%M%S")
-           
        try:
-           print("\n prep_mrms:  RealTime FLAG is true, only processing %s\n" % (in_filenames[:]))
+           print("\n Prep_MRMS:  RealTime FLAG is true processing first file:  %s\n" % (in_filenames[0]))
+           print(" Prep_MRMS:  RealTime FLAG is true processing last file:  %s\n" % (in_filenames[-1]))
            rlt_filename = "%s_%s" % ("obs_seq_RF", a_time.strftime("%Y%m%d%H%M"))
        except:
            print("\n============================================================================")
@@ -667,11 +661,11 @@ def main(argv=None):
            sys.exit(1)
 
    else:
-       in_filenames = get_dir_files(options.dir, options.grep, debug=_debug)
+       in_filenames = Get_Closest_Elevations(options.dir, a_time)
        out_filenames = []
-       print("\n prep_mrms:  Processing %d files in the directory:  %s\n" % (len(in_filenames), options.dir))
-       print("\n prep_mrms:  First file is %s\n" % (in_filenames[0]))
-       print("\n prep_mrms:  Last  file is %s\n" % (in_filenames[-1]))
+       print("\n Prep_MRMS:  Processing %d files in the directory:  %s\n" % (len(in_filenames), options.dir))
+       print("\n Prep_MRMS:  First file is %s\n" % (in_filenames[0]))
+       print("\n Prep_MRMS:  Last  file is %s\n" % (in_filenames[-1]))
    
  # Make sure there is a directory to write files into....
  
@@ -682,13 +676,14 @@ def main(argv=None):
            print("\n**********************   FATAL ERROR!!  ************************************")
            print("\n PREP_GRID3D:  Cannot create output dir:  %s\n" % options.out_dir)
            print("\n**********************   FATAL ERROR!!  ************************************")      
+           sys.exit(1)
+
 #-------------------------------------------------------------------------------
    if options.realtime != None:
        out_filename = os.path.join(options.out_dir, rlt_filename)
        time         = a_time
        print(" Out filename:  %s\n" % out_filename)
    else:
-       print options.realtime == None
        file = in_filenames[0]
        str_time     = "%s_%s" % (os.path.basename(file)[-27:-17], os.path.basename(file)[-16:-10])
        prefix       = "obs_seq_RF_%s" % str_time
