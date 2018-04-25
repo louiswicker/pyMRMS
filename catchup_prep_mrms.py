@@ -13,8 +13,8 @@ _prep_mrms       = "/work/wicker/realtime/pyMRMS/prep_mrms.py"
 
 year       = 2018
 mon        = 4
-day        = [3, 3]   # start and stop days
-hour       = [20, 22]    # start and stop hours
+day        = [24, 24]   # start and stop days
+hour       = [18, 22]    # start and stop hours
 min        = [0, 0]
 
 plot_level = 3
