@@ -4,7 +4,7 @@ Documentation for the pyMRMS processing
 
 ### What is this repository for? ###
 
-* Quick summary
+* Quick summary  
 The code here will take netCDF output, from an LDM feed of the MRMS data and convert it to a suitable
 form for DART.  The code specifies the layers wanted from the vertical grid at the top, retrives
 those levels, sets a threshold for min dBZ, and outputs both dBZ and zero-dBZ in a thinned manner.
@@ -20,7 +20,7 @@ is controled by the "catchup" script.  To use the scripts, please examine the ma
 
 * Configuration
 
-* Dependencies
+* Dependencies  
 pyMRMS:  matplotlib, numpy, pyART, and pyProj as dependencies.
 
 * Database configuration
