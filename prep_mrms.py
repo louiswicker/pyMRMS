@@ -225,8 +225,10 @@ def assemble_3D_grid(filenames, loc=None, debug=False):
     file_list = []
 
     for l in levels:
-        file_list.append(max(f for f in filenames if f.find(l) > -1))
-    
+        for f in filenames:
+            if f.find(l) > -1:
+                file_list.append(f)
+
     for n, filename in enumerate(file_list):
 
         if debug:
