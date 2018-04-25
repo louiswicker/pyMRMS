@@ -8,7 +8,7 @@ import datetime
 
 def run_mrms():
 
-    cmd = "/work/wicker/REALTIME/pyroth/cron_prep_mrms.py >& /work/wicker/REALTIME/pyroth/log_prep_mrms.txt &"
+    cmd = "/work/wicker/REALTIME/pyMRMS/cron_prep_mrms.py >& /work/wicker/REALTIME/pyMRMS/log_prep_mrms.txt &"
 
     print(" Cmd: %s" % (cmd))
 

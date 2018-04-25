@@ -9,7 +9,7 @@ import datetime
 _MRMS_feed       = "/work/LDM/MRMS/"
 _MRMS_obs_seq    = "/work/wicker/REALTIME/"
 _NEWSe_grid_info = "/scratch/wof/realtime/radar_files"
-_NEWSe_prep_mrms = "/work/wicker/REALTIME/pyroth/prep_mrms.py"
+_NEWSe_prep_mrms = "/work/wicker/REALTIME/pyMRMS/prep_mrms.py"
 
 plot_level = 3
 

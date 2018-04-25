@@ -9,7 +9,7 @@ import datetime
 _MRMS_feed       = "/work/LDM/MRMS"
 _MRMS_obs_seq    = "/work/wicker/REALTIME/"
 _NEWSe_grid_info = "/scratch/wof/realtime/radar_files"
-_prep_mrms       = "/work/wicker/realtime/pyroth/prep_mrms.py"
+_prep_mrms       = "/work/wicker/realtime/pyMRMS/prep_mrms.py"
 
 year       = 2018
 mon        = 4
