@@ -21,7 +21,7 @@ is controled by the "catchup" script.  To use the scripts, please examine the ma
 * Configuration
 
 * Dependencies  
-pyMRMS:  matplotlib, numpy, pyART, and pyProj as dependencies.
+Matplotlib, Numpy, pyART, and pyProj 
 
 * Database configuration
 * How to run tests
@@ -35,7 +35,8 @@ pyMRMS:  matplotlib, numpy, pyART, and pyProj as dependencies.
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-Use at your own risk - I might answer questions if I have time.  
-Louis.Wicker@noaa.gov
+* Repo owner or admin  
+Use at your own risk.  
+I may or may not have time to answer questions.  
+Louis.Wicker@noaa.gov  
 * Other community or team contact
