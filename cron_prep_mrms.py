@@ -6,7 +6,8 @@ import os
 import sys
 import datetime
 
-_MRMS_feed       = "/work/LDM/MRMS/"
+_MRMS_feed       = "/work/anthony.reinhart/radar_files/realtime/multi"
+_MRMS_feed       = "/work/LDM/MRMS"
 _MRMS_obs_seq    = "/work/wicker/REALTIME/REF"
 _NEWSe_grid_info = "/scratch/wof/realtime/radar_files"
 _NEWSe_prep_mrms = "/work/wicker/REALTIME/pyMRMS/prep_mrms.py"

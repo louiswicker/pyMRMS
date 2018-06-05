@@ -61,12 +61,12 @@ _temp_netcdf_file = "/work/wicker/REALTIME/tmp.nc"
 
 # Grid stuff
 
-NX = 180
-NY = 180
+NX = 200
+NY = 200
 
 # Width in minutes of time to look for radar files every 15 min
 
-_dt_window = [-300,120]
+_dt_window = [-5,2]
 
 # Debug
 
@@ -157,7 +157,7 @@ def Get_Closest_Elevations(path, anal_time, sub_dir=None, window=_dt_window):
        if window[0] > 0:  # this is when I am stupid...
            window[0] = -window[0]
        lwindow = window
-   
+
    for elev in os.listdir(full_path):
    
        tilt_time = {}
@@ -167,12 +167,19 @@ def Get_Closest_Elevations(path, anal_time, sub_dir=None, window=_dt_window):
            tempdate = DT.datetime(int(fn[0:4]),int(fn[4:6]),int(fn[6:8]),int(fn[9:11]),int(fn[11:13]),int(fn[13:15]))
 
            timediff = anal_time - tempdate
+           time0    = anal_time + DT.timedelta(0,minutes=lwindow[0])
+           time1    = anal_time + DT.timedelta(0,minutes=lwindow[1])
            
            # Change this if you want +something -window instead of 0-900. if statement is +2-15
            # if timediff >= datetime.timedelta(0,-120) and timediff < datetime.timedelta(0,window):
 
-           if timediff >= DT.timedelta(0,lwindow[0]) and timediff < DT.timedelta(0,lwindow[1]):
+         # if timediff >= DT.timedelta(0,minutes=lwindow[0]) and timediff < DT.timedelta(0,minutes=lwindow[1]):
+           if tempdate >= time0 and tempdate < time1:
                tilt_time["%s/%s" % (elev,fn)] = timediff
+               print anal_time
+               print time0
+               print time1
+               print tilt_time
            else:
                continue
 
@@ -652,6 +659,7 @@ def main(argv=None):
        in_filenames = Get_Closest_Elevations(options.dir, a_time)
 
        try:
+           print("\n Prep_MRMS:  RealTime FLAG is true number of levels found:  %s\n" % (len(in_filenames)))
            print("\n Prep_MRMS:  RealTime FLAG is true processing first file:  %s\n" % (in_filenames[0]))
            print(" Prep_MRMS:  RealTime FLAG is true processing last file:  %s\n" % (in_filenames[-1]))
            rlt_filename = "%s_%s" % ("obs_seq_RF", a_time.strftime("%Y%m%d%H%M"))

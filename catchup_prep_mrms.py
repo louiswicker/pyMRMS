@@ -12,10 +12,10 @@ _NEWSe_grid_info = "/scratch/wof/realtime/radar_files"
 _prep_mrms       = "/work/wicker/realtime/pyMRMS/prep_mrms.py"
 
 year       = 2018
-mon        = 4
-day        = [24, 24]   # start and stop days
-hour       = [18, 22]    # start and stop hours
-min        = [0, 0]
+mon        = 5
+day        = [18, 18]   # start and stop days
+hour       = [20, 20]    # start and stop hours
+min        = [45, 45]
 
 plot_level = 3
 
