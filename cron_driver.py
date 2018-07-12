@@ -22,7 +22,7 @@ schedular = BlockingScheduler()
 
 # schedule the prep_mrms...
 
-job = schedular.add_job(run_mrms, trigger='cron', hour='11', minute='49')
+job = schedular.add_job(run_mrms, trigger='cron', hour='10', minute='30')
 
 time.sleep(300)
 job.unschedule()

@@ -57,7 +57,7 @@ _plot_format = 'png'
 # Radar information
 
 _dbz_name         = "MergedReflectivityQC_smoothed"
-_temp_netcdf_file = "/work/wicker/REALTIME/tmp.nc"
+_temp_netcdf_file = "/work/wicker/REALTIME/pyMRMS/tmp.nc"
 
 # Grid stuff
 
@@ -312,6 +312,12 @@ def assemble_3D_grid(filenames, loc=None, debug=False):
             array[n,...] = f.variables[_dbz_name][j0:j1,i0:i1]
          
         f.close()
+
+    # remove tmp.nc file - this can cause problems.
+
+    cmd = "rm -f %s" % (_temp_netcdf_file)
+    os.system(cmd)
+
   
     ref = ma.MaskedArray(array, mask = (array < missingData+1.))        
     
