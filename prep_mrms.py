@@ -313,10 +313,10 @@ def assemble_3D_grid(filenames, loc=None, debug=False):
          
         f.close()
 
-    # remove tmp.nc file - this can cause problems.
+    # remove tmp.nc file - this can cause problems with multiple users..
 
-    cmd = "rm -f %s" % (_temp_netcdf_file)
-    os.system(cmd)
+        cmd = "rm -f %s" % (_temp_netcdf_file)
+        os.system(cmd)
 
   
     ref = ma.MaskedArray(array, mask = (array < missingData+1.))        
