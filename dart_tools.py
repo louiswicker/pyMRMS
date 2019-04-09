@@ -216,7 +216,7 @@ def beam_elv(sfc_range, z):
 #
 ########################################################################################  
 def write_DART_ascii(obs, filename=None, obs_error=None, zero_dbz_obtype=_zero_dbz_obtype,
-                     levels = None, QC_info=None, zero_levels=[]):
+                     levels = [], QC_info=[], zero_levels=[]):
 
    if filename == None:
        print("\n write_DART_ascii:  No output file name is given, writing to %s" % "obs_seq.txt")
@@ -265,14 +265,14 @@ def write_DART_ascii(obs, filename=None, obs_error=None, zero_dbz_obtype=_zero_d
        platform_vert_coord = 3
    else:
        try:
-           nz, ny, nx         = data.shape
-           if levels  == None:
-               nz2            = nz + len(zero_levels)
+           nz, ny, nx     = data.shape
+           if len(levels) == 0:
+               nz2        = nz + len(zero_levels)
            else:
-               nz2            = len(levels) + len(zero_levels)
+               nz2        = len(levels) + len(zero_levels)
                
-           new_data           = np.ma.zeros((nz2, ny, nx), dtype=np.float32)
-           new_hgts           = np.ma.zeros((nz2), dtype=np.float32)
+           new_data       = np.ma.zeros((nz2, ny, nx), dtype=np.float32)
+           new_hgts       = np.ma.zeros((nz2), dtype=np.float32)
            
            for n, k in enumerate(levels):
                new_data[n,...] = data[n]

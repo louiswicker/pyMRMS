@@ -34,7 +34,7 @@ import scipy.interpolate
 import scipy.ndimage as ndimage
 import scipy.spatial
 from optparse import OptionParser
-from mpl_toolkits.axes_grid1.anchored_artists import AnchoredText
+from matplotlib.offsetbox import AnchoredText
 import netCDF4 as ncdf
 
 from pyproj import Proj
@@ -176,10 +176,10 @@ def Get_Closest_Elevations(path, anal_time, sub_dir=None, window=_dt_window):
          # if timediff >= DT.timedelta(0,minutes=lwindow[0]) and timediff < DT.timedelta(0,minutes=lwindow[1]):
            if tempdate >= time0 and tempdate < time1:
                tilt_time["%s/%s" % (elev,fn)] = timediff
-               print anal_time
-               print time0
-               print time1
-               print tilt_time
+    #          print anal_time
+    #          print time0
+    #          print time1
+    #          print tilt_time
            else:
                continue
 
@@ -568,7 +568,7 @@ def plot_grid(ref, sweep, plot_filename=None, shapefiles=None, interactive=False
 
 # Plot zeros as "o"
 
-  if zero_dbz != None:
+  if zero_dbz.mask.any() == True:
       r_mask = (zero_dbz.mask == False)     
       bgmap.scatter(xg[r_mask], yg[r_mask], s=15, facecolors='none', \
                     edgecolors='k', alpha=0.3, ax=axes[1]) 
